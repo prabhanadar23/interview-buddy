@@ -1,10 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { supabase } from "@/lib/supabase";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [role, setRole] = useState("AI/ML");
+  const [user, setUser] = useState<any>(null);
+  const router = useRouter();
   const roles = ["AI/ML", "Frontend", "Backend", "Data Science", "Product Manager", "DevOps"];
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      if (!data.user) router.push("/login");
+      else setUser(data.user);
+    });
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/login");
+  };
 
   return (
     <div style={{minHeight:"100vh", background:"#FDFBF7", color:"#1A1A1A", fontFamily:"Georgia, serif"}}>
@@ -15,7 +31,10 @@ export default function Home() {
             <div style={{width:32, height:32, background:"#1A1A1A", color:"#FDFBF7", display:"flex", alignItems:"center", justifyContent:"center", fontWeight:"bold"}}>I</div>
             <span style={{fontWeight:"bold", letterSpacing:2, fontSize:14}}>INTERVIEW BUDDY</span>
           </div>
-          <span style={{fontSize:11, letterSpacing:3, opacity:0.5}}>EST. 2026 • PRIVATE BETA</span>
+          <div style={{display:"flex", alignItems:"center", gap:16}}>
+            <span style={{fontSize:11, letterSpacing:3, opacity:0.5}}>EST. 2026 • {user?.email || "PRIVATE BETA"}</span>
+            <button onClick={handleLogout} style={{background:"#1A1A1A", color:"#FDFBF7", padding:"8px 14px", fontSize:10, letterSpacing:2, border:"none", cursor:"pointer"}}>LOGOUT</button>
+          </div>
         </div>
       </div>
 
