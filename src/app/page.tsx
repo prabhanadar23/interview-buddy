@@ -24,8 +24,8 @@ export default function Home() {
 
   return (
     <div style={{minHeight:"100vh", background:"#FDFBF7", color:"#1A1A1A", fontFamily:"Georgia, serif"}}>
-      {/* Header */}
-      <div style={{borderBottom:"1px solid #E7E0D3", background:"rgba(253,251,247,0.8)", position:"sticky", top:0, backdropFilter:"blur(10px)"}}>
+      {/* Header - NOT STICKY for report screenshot */}
+      <div style={{borderBottom:"1px solid #E7E0D3", background:"#FDFBF7"}}>
         <div style={{maxWidth:1200, margin:"0 auto", padding:"18px 24px", display:"flex", justifyContent:"space-between", alignItems:"center"}}>
           <div style={{display:"flex", alignItems:"center", gap:10}}>
             <div style={{width:32, height:32, background:"#1A1A1A", color:"#FDFBF7", display:"flex", alignItems:"center", justifyContent:"center", fontWeight:"bold"}}>I</div>
@@ -38,8 +38,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Main */}
-      <div style={{maxWidth:1200, margin:"0 auto", padding:"60px 24px", display:"grid", gridTemplateColumns:"1.2fr 0.8fr", gap:60}}>
+      {/* Main - MOVED UP from 60px to 30px */}
+      <div style={{maxWidth:1200, margin:"0 auto", padding:"30px 24px 60px 24px", display:"grid", gridTemplateColumns:"1.2fr 0.8fr", gap:60}}>
         <div>
           <div style={{fontSize:11, letterSpacing:4, opacity:0.4, marginBottom:20}}>THE CLASSIC EDITION — VOL. I</div>
           <h1 style={{fontSize:64, lineHeight:"0.9", fontWeight:400, margin:0}}>
